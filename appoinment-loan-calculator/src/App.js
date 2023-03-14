@@ -5,6 +5,8 @@ import Tenure from "./components/Tenure";
 import Result from "./components/Result";
 
 function App() {
+  //
+  //
   return (
     <div className="App">
       <Navbar/>
