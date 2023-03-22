@@ -19,6 +19,7 @@ const SliderComponent = ({defaultValue, min, max, amount, label, unit}) => {
     />
     </Stack>
     </>
+    <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
   )
 }
 
