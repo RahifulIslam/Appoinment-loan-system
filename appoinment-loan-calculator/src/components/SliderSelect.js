@@ -2,7 +2,8 @@
 import React from 'react'
 import SliderComponent from './common/SliderComponent'
 
-const SliderSelect = ({data}) => {
+const SliderSelect = ({data, setData}) => {
+  console.log("Data are:", data)
   return (
     <div>
       <SliderComponent
@@ -14,40 +15,59 @@ const SliderSelect = ({data}) => {
         max={10000}
         step={100}
         label={"Home value"}
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e, value) => setData({
+          ...data,
+          homeValue: value,
+          downPayment: value * 0.2,
+          loanAmount: value * 0.8
+        })}
       />
 
       <SliderComponent
-        amount={3500}
+        amount={data.downPayment}
         unit="$"
-        defaultValue={3000}
-        min={1000}
-        max={10000}
+        defaultValue={data.downPayment}
+        value={data.downPayment}
+        min={0}
+        max={data.homeValue}
         step={100}
         label={"Down payment"}
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e, value) => setData({
+          ...data,
+          downPayment: value,
+          loanAmount: data.homeValue - value
+        })}
       />
 
       <SliderComponent
-        amount={3500}
+        amount={data.loanAmount}
         unit="$"
-        defaultValue={3000}
-        min={1000}
-        max={10000}
+        defaultValue={data.loanAmount}
+        value={data.loanAmount}
+        min={0}
+        max={data.homeValue}
         step={100}
         label={"Loan amount"}
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e, value) => setData({
+          ...data,
+          loanAmount: value,
+          downPayment: data.homeValue - value
+        })}
       />
 
       <SliderComponent
-        amount={2}
+        amount={data.interestRate}
         unit="%"
-        defaultValue={2}
+        defaultValue={data.interestRate}
+        value={data.interestRate}
         min={2}
         max={18}
         step={.5}
         label={"Interest rate"}
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e, value) => setData({
+          ...data,
+          interestRate: value
+        })}
       />
     </div>
   )
